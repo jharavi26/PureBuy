@@ -1,0 +1,19 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  margin : 5px;
+  background-color : white;
+  }
+
+
+.header img{
+  height: 100px;
+  width: 100px
+}
+
+.start{
+  font-size: 24px;
+  border: none;
+  background-color: rgb(139, 139, 196);
+  margin: 5px;
+}
