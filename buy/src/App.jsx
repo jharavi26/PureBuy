@@ -10,26 +10,28 @@ import Home from './Authentication/Home';
 
 function App() {
 
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
-  useEffect(()=>{
-    auth.onAuthStateChanged((user)=>{
-      setUser(user)
-    }); 
-  },[])
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe(); // Cleanup function to prevent memory leaks
+  }, []);
 
   return (
   
     <div className='app'>
       <BrowserRouter>
       <Routes>
-        <Route path = "/" element = {<Home />}>
-        <Route path = "register" element = {<Register/>}/>
-        </Route>
-        {/* <Route path='/' element = {user ? <Navigate to = "/profile"/> : <Login/>}/> */}
-        <Route path = "/login" element = {<Login/>} />
-        <Route path = "/profile" element = {<Profile/>} />
-
+      <Route path="/" element={user ? <Navigate to="/profile" /> : <Home />} />
+          <Route path="/login" element={user ? <Navigate to="/profile" /> : <Login />} />
+          <Route path="/register" element={user ? <Navigate to="/profile" /> : <Register />} />
+          
+          {/* Protect Profile Route */}
+          <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
+       
       </Routes>
       </BrowserRouter>
       
