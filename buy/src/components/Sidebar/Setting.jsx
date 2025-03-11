@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "./Setting.css"
+import { useNavigate } from "react-router-dom";
 
 
 const Settings = () => {
-  const [username, setUsername] = useState("Anuj Yadav");
+  const [username, setUsername] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [password, setPassword] = useState("");
   const [profilePic, setProfilePic] = useState(null);
+
+  const navigate = useNavigate();
+
 
   // Handle Profile Picture Upload
   const handleProfilePicChange = (event) => {
@@ -24,7 +28,8 @@ const Settings = () => {
 
   // Handle Save Settings
   const handleSave = () => {
-    alert("Settings Saved Successfully!");
+    navigate("/profile");
+
   };
 
   return (

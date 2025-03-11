@@ -5,6 +5,10 @@ import Profile from './Authentication/Profile';
 import Register from './Authentication/Register';
 import { auth } from './Authentication/firebase';
 import Home from './Authentication/Home';
+import Sidebar from './components/Sidebar/Sidebar';
+import Setting from './components/Sidebar/Setting';
+
+
 
 
 
@@ -24,13 +28,18 @@ function App() {
   
     <div className='app'>
       <BrowserRouter>
+    
       <Routes>
       <Route path="/" element={user ? <Navigate to="/profile" /> : <Home />} />
           <Route path="/login" element={user ? <Navigate to="/profile" /> : <Login />} />
           <Route path="/register" element={user ? <Navigate to="/profile" /> : <Register />} />
-          
-          {/* Protect Profile Route */}
-          <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
+
+          {/* ✅ Fixed Profile Route (Removed Duplicate) */}
+          <Route path="/profile" element={user ? <><Sidebar /><Profile /></> : <Navigate to="/login" />} />
+
+          {/* ✅ Settings Route (No authentication check) */}
+          <Route path="/setting" element={<><Sidebar /><Setting /></>} />
+      
        
       </Routes>
       </BrowserRouter>
