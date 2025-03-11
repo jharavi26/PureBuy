@@ -62,6 +62,7 @@ const Cart = () => {
         <div className='summary'>
           <span className='title'>Subtotal ({cart.length}) items.</span>
           <span>Total: {Math.trunc(total)}</span>
+          <button style={{fontSize:"20px" , marginTop : "10px"}}>Checkout</button>
         </div>
       </div>
     </div>
