@@ -7,6 +7,7 @@ import { auth } from './Authentication/firebase';
 import Home from './Authentication/Home';
 import Sidebar from './components/Sidebar/Sidebar';
 import Setting from './components/Sidebar/Setting';
+import Cart from './components/products/Cart';
 
 
 
@@ -39,6 +40,7 @@ function App() {
 
           {/* ✅ Settings Route (No authentication check) */}
           <Route path="/setting" element={<><Sidebar /><Setting /></>} />
+          <Route path = "/cart" element = {<Cart/>}></Route>
       
        
       </Routes>

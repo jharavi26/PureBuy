@@ -3,7 +3,7 @@
   margin-left: 150px; /* ✅ Matches Sidebar Width */
   width: calc(100% - 150px); /* ✅ Makes sure it fits */
   position: fixed;
-  background-color: red;
+  height: 50px;
 }
 
 
@@ -14,7 +14,7 @@
   width: 100%;
   padding: 10px 20px;
   position: relative;
-
+  background-color: rgb(0, 255, 81);
 }
 
 /* ✅ Center the Search Box */
@@ -35,7 +35,7 @@
   border: none;
   outline: none;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   width: 200px; /* Adjust width as needed */
 }
 
@@ -48,4 +48,37 @@
 .cart-icon {
   margin-left: auto; /* Pushes it to the right */
   cursor: pointer;
+}
+
+
+
+.cartitem{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+  margin-bottom: 20px;
+}
+
+.cartimage{
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.cartDetails{
+  display: flex;
+  flex: 1;
+  padding: 0 20px;
+  flex-direction: column;
+  color: black;
+}
+
+.add{
+  background-color: white;
+  position: absolute;
+  left: 80%;
+  top: 40px;
+
 }
