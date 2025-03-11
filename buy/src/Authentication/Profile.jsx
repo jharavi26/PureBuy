@@ -9,7 +9,7 @@ function Profile() {
   return (
     <div className="profile-container">
       <Sidebar />
-
+  
       <div className="header">
         <div className="search-box">
           <input type="text" placeholder="Search" />
@@ -17,7 +17,7 @@ function Profile() {
         </div>
         <IoCartOutline size={40} className="cart-icon" />
       </div>
-      <Product/>
+      {/* <Product/> */}
     </div>
   );
 }

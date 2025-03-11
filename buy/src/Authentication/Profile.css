@@ -1,8 +1,11 @@
 .profile-container {
   display: flex;
-  margin-left: 200px; /* ✅ Matches Sidebar Width */
-  width: calc(100% - 200px); /* ✅ Makes sure it fits */
+  margin-left: 150px; /* ✅ Matches Sidebar Width */
+  width: calc(100% - 150px); /* ✅ Makes sure it fits */
+  position: fixed;
+  background-color: red;
 }
+
 
 .header {
   display: flex;
@@ -10,8 +13,8 @@
   justify-content: space-between; /* Pushes items apart */
   width: 100%;
   padding: 10px 20px;
-  background-color: #f8f9fa;
   position: relative;
+
 }
 
 /* ✅ Center the Search Box */
