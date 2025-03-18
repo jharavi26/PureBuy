@@ -9,12 +9,6 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Setting from "./components/Sidebar/Setting";
 import Cart from "./components/products/Cart";
 
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./components/CheckoutForm";
-
-
-const stripePromise = loadStripe("REACT_APP_STRIPE_PUBLISHABLE_KEY");
 
 function App() {
   const [user, setUser] = useState(null);
@@ -72,14 +66,6 @@ function App() {
           />
           <Route path="/cart" element={<Cart />}></Route>
 
-          <Route
-            path="/checkout"
-            element={
-              <Elements stripe={stripePromise}>
-                <CheckoutForm />
-              </Elements>
-            }
-          />
         </Routes>
       </BrowserRouter>
     </div>

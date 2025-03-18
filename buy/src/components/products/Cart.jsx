@@ -14,7 +14,32 @@ const Cart = () => {
   return (
     <div className='home'>
       <div className='productContainer'>
-        {cart.length > 0 ? (
+        <div className='cartheader'>
+        <h1>Cart Calculation {cart.length}</h1>
+        <button>Empty Cart</button>
+        </div>
+        </div>
+        </div>
+  )
+}
+
+export default Cart; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* {cart.length > 0 ? (
           <ol>
             <div className='listitem'>
               {cart.map((item) => (
@@ -67,6 +92,4 @@ const Cart = () => {
       </div>
     </div>
   );
-};
-
-export default Cart;
+}; */}
