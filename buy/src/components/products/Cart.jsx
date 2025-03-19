@@ -12,9 +12,6 @@ const Cart = () => {
   const {cartItems , totalPrice} = useSelector((state)=>state.cart)
 
  
-
-
-
   return (
     <div className="home">
     <div className="productContainer">
@@ -130,56 +127,9 @@ export default Cart;
 
 
 
-//           {/* {cart.length > 0 ? (
-//             <ol>
-//               {cart.map((item) => (
-//                 <li key={item.id} className="listitem">
-//                   <span> Product 
-//                     <img
-//                       src={item.thumbnail}
-//                       style={{ height: "100px", width: "100px" }}
-//                       alt={item.category}
-//                     />
-//                   </span>
-//                   <span style={{ marginRight: "10px" }}>
-//                     Category: {item.category}
-//                   </span>
-//                   <span style={{ marginRight: "10px" }}>
-//                     Price: ${Math.floor(item.price)}
-//                   </span>
-//                   <span style={{ marginRight: "10px" }}>
-//                     Rating: {Math.ceil(item.rating)}
-//                   </span>
 
-//                   {/* Quantity Dropdown */}
-                  
 
-//                   {/* Delete Icon */}
-//                   <MdDelete
-//                     style={{
-//                       fontSize: "20px",
-//                       cursor: "pointer",
-//                       color: "black",
-// //                       marginLeft: "10px",
-// //                     }}
-// //                     onClick={() =>
-// //                       dispatch({
-// //                         type: "REMOVE_FROM_CART",
-// //                         payload: item,
-// //                       })
-// //                     } 
-// //                   />
-// //                 </li>
-// //               ))}
-// //             </ol>
-// //           ) : (
-// //             <h2>Your cart is empty</h2>
-// //           )}
-// //         </div>
-// //       </div>
-// //     </div>
-// //   );
-// // };
+
 
     
 
