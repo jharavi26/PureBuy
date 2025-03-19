@@ -9,6 +9,8 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Setting from "./components/Sidebar/Setting";
 import Cart from "./components/products/Cart";
 import Help from "./components/Sidebar/Help";
+import Success from "./components/UI/Success";
+import Cancel from "./components/UI/Cancel";
 
 
 function App() {
@@ -78,6 +80,8 @@ function App() {
             }
           />
           <Route path="/cart" element={<Cart/>}></Route>
+          <Route path = "/sucess" element = {<Success/>}></Route>
+          <Route path = "/cancel" element = {<Cancel/>}></Route>
 
         </Routes>
       </BrowserRouter>

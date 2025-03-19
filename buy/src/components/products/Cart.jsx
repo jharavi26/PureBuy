@@ -3,6 +3,9 @@ import { MdDeleteForever } from "react-icons/md";
 import "./Cart.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateQuantity, removeFromCart, addToCart , emptyCart , removeSingleItem } from '../../redux/features/cartSlice';
+import {loadStripe} from '@stripe/stripe-js';
+
+
 
 const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -10,6 +13,7 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+
 
   // Increment item quantity
   const handleIncrement = (item) => {
@@ -38,6 +42,42 @@ const Cart = () => {
     const quantity = cartItems.reduce((acc, item) => acc + item.qty, 0);
     setTotalQuantity(quantity);
   }, [cartItems]);
+
+  const makePayment = async()=>{
+    const stripe = await loadStripe("pk_test_51R1T3lFPYHVofb34iWSc3hrrWtSjmASXukeXfU7XS0DwuD96OOzPjUb6Ca7WRG5WxXTHuAe0oOHKNmZOU9Ou6k2300BTEtxzYG");
+
+    const body = {
+      products : cartItems
+    }
+
+    const headers = {
+      "Content-Type":"application/json"
+    }
+
+    const response = await fetch("http://localhost:7000/api/create-checkout-session",{
+      method:"POST",
+      headers:headers,
+      body:JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Server Error:", errorText);
+    return;
+}
+
+  const session = await response.json();
+
+  const result = stripe.redirectToCheckout({
+      sessionId:session.id
+  });
+  
+  if(result.error){
+      console.log(result.error);
+  }
+}  
+  
+
 
   return (
     <div className="home">
@@ -114,7 +154,7 @@ const Cart = () => {
                   <th>{totalQuantity}</th>
                   <th className="text-right">Total Price: ₹{totalPrice.toFixed(2)}</th>
                   <th className="text-right">
-                    <button className="checkout">Checkout</button>
+                    <button className="checkout" onClick={makePayment}>Checkout</button>
                   </th>
                 </tr>
               </tfoot>
