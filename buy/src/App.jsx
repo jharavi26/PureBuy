@@ -80,7 +80,7 @@ function App() {
             }
           />
           <Route path="/cart" element={<Cart/>}></Route>
-          <Route path = "/sucess" element = {<Success/>}></Route>
+          <Route path = "/success" element = {<Success/>}></Route>
           <Route path = "/cancel" element = {<Cancel/>}></Route>
 
         </Routes>
