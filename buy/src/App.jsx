@@ -64,7 +64,7 @@ function App() {
               </>
             }
           />
-          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/cart" element={<Cart/>}></Route>
 
         </Routes>
       </BrowserRouter>

@@ -6,18 +6,19 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";  // ✅ Import Link
 import "./Profile.css";
 import Product from '../components/products/Product';
-import { useCart } from '../components/context/Context';
 import { Badge } from 'primereact/badge';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from '../redux/features/cartSlice';
 
 function Profile() {
   const [open, setOpen] = useState(false);  // ✅ Initialize as false
-  const { state: { cart }, dispatch } = useCart();  // ✅ Also extract dispatch
 
-  const handleCart = () => {
-    if (cart.length > 0) {
-      setOpen((prev) => !prev);
-    }
-  };
+  const dispatch = useDispatch();
+
+  const {cartItems} = useSelector((state)=>state.cart)
+
+  console.log(cartItems);
+
 
   return (
     <>
@@ -31,9 +32,8 @@ function Profile() {
           </div>
 
           {/* ✅ Fix: Call handleCart correctly */}
-          <IoCartOutline size={40} className="cart-icon" onClick={handleCart} />
-          
-          <Badge value={cart.length}></Badge>
+          <IoCartOutline size={40} className="cart-icon" onClick={()=>setOpen(true)}/>
+          <Badge value={cartItems.length} ></Badge>
         </div>
       </div>
 
@@ -41,7 +41,7 @@ function Profile() {
 
       {open ? (
         <div className='add'>
-          {cart.map((item) => (
+          {cartItems.map((item) => (
             <span className='cartitem' key={item.id}>
               <img src={item.thumbnail} className='cartimage' alt={item.title} />
               <div className='cartDetails'>
@@ -52,12 +52,7 @@ function Profile() {
               {/* ✅ Fix: Ensure AiFillDelete is imported */}
               <AiFillDelete 
                 style={{ fontSize: "20px", cursor: "pointer", color: "black" }}
-                onClick={() => {
-                  dispatch({
-                    type: "REMOVE_FROM_CART",
-                    payload: item,
-                  });
-                }}
+                onClick={() =>dispatch(removeFromCart({ id: item.id }))} 
               />
             </span>
           ))}

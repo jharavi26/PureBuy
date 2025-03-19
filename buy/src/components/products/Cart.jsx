@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useCart } from '../context/Context';
-import { MdDelete } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import "./Cart.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { updateQuantity } from '../../redux/features/cartSlice';
 
 const Cart = () => {
-  const { state: { cart }, dispatch } = useCart();
   const [total, setTotal] = useState(0);
+  const [itemTotals, setItemTotals] = useState(0);
 
-  useEffect(() => {
-    setTotal(cart.reduce((acc, curr) => acc + Math.floor(curr.price) * curr.qty, 0));
-  }, [cart]);
+  const dispatch = useDispatch();
+  const {cartItems , totalPrice} = useSelector((state)=>state.cart)
+
+ 
+
+
 
   return (
     <div className="home">
     <div className="productContainer">
       <div className="cartheader">
-        <h1>Cart Calculation ({cart.length})</h1>
-        <button onClick={() => dispatch({ type: "EMPTY_CART" })}>
+        <h1>Cart Calculation ({cartItems.length})</h1>
+        <button >
           Empty Cart
         </button>
       </div>
 
       <div className="component">
-        {cart.length === 0 ? (
+        {cartItems.length === 0 ? (
           <table>
             <tbody>
               <tr>
@@ -50,47 +54,48 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cart.map((data, index) => (
+              {cartItems.map((data, index) => (
                 <tr key={index}>
                   <td>
                     <button
                       className="prdct-delete"
                       onClick={() => handleDecrement(data.id)}
                     >
-                      <i className="fa fa-trash"></i>
+                      <MdDeleteForever/>
                     </button>
                   </td>
                   <td>
                     <div className="product-img">
-                      <img src={data.imgdata} alt={data.dish} />
+                      <img src={data.thumbnail} alt={data.dish} />
                     </div>
                   </td>
                   <td>
                     <div className="product-name">
-                      <p></p>
+                      <p>{data.category}</p>
                     </div>
                   </td>
-                  <td></td>
+                  <td>
+                    <div className='product-price'>
+                      <p>{Math.floor(data.price)}</p>
+                    </div>
+                  </td>
                   <td>
                     <div className="prdct-qty-container">
-                      <button
-                        className="prdct-qty-btn"
-                        type="button"
-                        onClick={data.qnty <= 1 ? () => handleDecrement(data.id) : () => handleSingleDecrement(data)}
-                      >
-                        <i className="fa fa-minus"></i>
-                      </button>
-                      <input type="text" className="qty-input-box" value={qty} disabled />
-                      <button
-                        className="prdct-qty-btn"
-                        type="button"
-                        onClick={() => handleIncrement(data)}
-                      >
-                        <i className="fa fa-plus"></i>
-                      </button>
+                    <select
+                    value={data.qty} 
+                    onChange={(e) => dispatch(updateQuantity({ id: data.id, qty: Number(e.target.value) }))}
+                  > QTY
+                    {[...Array(10).keys()].map((num) => (
+                      <option key={num + 1} value={num + 1}>
+                        {num + 1}
+                      </option>
+                    ))}
+                  </select>
                     </div>
                   </td>
-                  <td className="text-right"></td>
+                  <td className="text-right">
+                    <p>{itemTotals}</p>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -100,11 +105,14 @@ const Cart = () => {
                 <th colSpan={3}>&nbsp;</th>
                 <th>
                   Items In Cart <span className="ml-2 mr-2">:</span>
-                  <span className="text-danger">{total}</span>
+                  <span className="text-danger">{cartItems.length}</span>
                 </th>
                 <th className="text-right">
-                  Total Price<span className="ml-2 mr-2">:</span>
+                  Total Price<span className="ml-2 mr-2">:{totalPrice}</span>
                   <span className="text-danger"></span>
+                </th>
+                <th className="text-right">
+                  <button className="checkout">Checkout</button>
                 </th>
               </tr>
             </tfoot>
@@ -144,24 +152,7 @@ export default Cart;
 //                   </span>
 
 //                   {/* Quantity Dropdown */}
-//                   <select
-//                     value={item.qty}
-//                     onChange={(e) =>
-//                       dispatch({
-//                         type: "CHANGE_CART_QTY",
-//                         payload: {
-//                           id: item.id,
-//                           qty: Number(e.target.value),
-//                         },
-//                       })
-//                     }
-//                   > QTY
-//                     {[...Array(10).keys()].map((num) => (
-//                       <option key={num + 1} value={num + 1}>
-//                         {num + 1}
-//                       </option>
-//                     ))}
-//                   </select>
+                  
 
 //                   {/* Delete Icon */}
 //                   <MdDelete

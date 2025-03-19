@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import "./Product.css";
-import { useCart } from '../context/Context';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/features/cartSlice';
+import { removeFromCart } from '../../redux/features/cartSlice';
+
 
 function Product() {
   const [products, setProducts] = useState([]);
   const [page , setPage] = useState(1)
 
+  const dispatch = useDispatch();
 
-  const {state  : {cart} , dispatch } = useCart();
+  const send  = (e)=>{
+    dispatch(addToCart(e));
+  }
 
-
+  
   const FetchData = async ()=>{
     const res = await fetch("https://dummyjson.com/products?limit=50");
     const data = await res.json();
@@ -35,15 +41,15 @@ function Product() {
        products.length > 0 && <div className='products'>
         {
           products.slice(page*10-10, page*10).map((item , index)=>{
-            return <div className='product'>
+            return <div className='product' key = {index}>
             <div className='product-image'>
              <img src = {item.thumbnail} alt = {item.description}/>
              <span>Category : {item.category}</span>
              <span>Price : {item.price.toString().split("")[0]}</span>
              <span>Rating : {Math.floor(item.rating)}</span>
-              <button style={{backgroundColor :"yellow"}} onClick={()=>dispatch({type : "REMOVE_FROM_CART" , payload : item, })}>
+              <button style={{backgroundColor :"yellow"}}  onClick={() => dispatch(removeFromCart({ id: item.id }))} >
               Remove </button>
-              <button style={{backgroundColor : "green"}} onClick={()=> dispatch({type : "ADD_TO_CART", payload : item,})}>
+              <button style={{backgroundColor : "green"}} onClick={()=>send(item)}>
                 Add to Cart</button>
              </div>
              </div>
