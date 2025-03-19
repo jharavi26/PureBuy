@@ -29,6 +29,10 @@ const Sidebar = () => {
     navigate("/setting")
   }
 
+  const handleHelp = ()=>{
+    navigate("/help")
+  }
+
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
@@ -44,7 +48,7 @@ const Sidebar = () => {
         <li onClick={handleSetting}>
           <FaCog /> <span className="sidebar-text">Settings</span>
         </li>
-        <li>
+        <li onClick={handleHelp}>
           <FaQuestionCircle /> <span className="sidebar-text">Help</span>
         </li>
         <li onClick={handleLogout} >

@@ -1,0 +1,56 @@
+.help-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.help-section {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.help-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #007bff;
+}
+
+details {
+  margin: 10px 0;
+}
+
+summary {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+summary:hover {
+  color: #007bff;
+}
+
+.contact-section p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

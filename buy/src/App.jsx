@@ -8,6 +8,7 @@ import Home from "./Authentication/Home";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Setting from "./components/Sidebar/Setting";
 import Cart from "./components/products/Cart";
+import Help from "./components/Sidebar/Help";
 
 
 function App() {
@@ -61,6 +62,18 @@ function App() {
               <>
                 <Sidebar />
                 <Setting />
+                
+              </>
+            }
+          />
+
+          <Route
+            path="/help"
+            element={
+              <>
+                <Sidebar />
+                <Help />
+                
               </>
             }
           />
