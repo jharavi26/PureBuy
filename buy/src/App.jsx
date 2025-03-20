@@ -11,6 +11,7 @@ import Cart from "./components/products/Cart";
 import Help from "./components/Sidebar/Help";
 import Success from "./components/UI/Success";
 import Cancel from "./components/UI/Cancel";
+import UserProfile from "./components/Sidebar/UserProfile";
 
 
 function App() {
@@ -75,6 +76,16 @@ function App() {
               <>
                 <Sidebar />
                 <Help />
+                
+              </>
+            }
+          />
+           <Route
+            path="/userprofile"
+            element={
+              <>
+                <Sidebar />
+                <UserProfile/>
                 
               </>
             }

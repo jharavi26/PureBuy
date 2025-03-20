@@ -1,0 +1,15 @@
+/* UserProfile.css */
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.user-profile img {
+  border-radius: 50%;
+  margin-top: 10px;
+}

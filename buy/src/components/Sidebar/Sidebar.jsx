@@ -33,17 +33,18 @@ const Sidebar = () => {
     navigate("/help")
   }
 
+  const handleProfile = ()=>{
+    navigate("/userprofile")
+  }
+
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
         <FaBars />
       </div>
       <ul className="sidebar-list">
-        <li>
+        <li onClick={handleProfile}>
           <FaUser /> <span className="sidebar-text">User Details</span>
-        </li>
-        <li>
-          <FaShoppingCart /> <span className="sidebar-text">Orders</span>
         </li>
         <li onClick={handleSetting}>
           <FaCog /> <span className="sidebar-text">Settings</span>
