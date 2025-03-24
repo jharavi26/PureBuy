@@ -1,9 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const serverless = require("serverless-http");
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
@@ -27,13 +28,12 @@ app.post("/api/create-checkout-session", async (req, res) => {
             quantity: product.qty,
         }));
 
-        // ✅ Fix: Use `lineItems` instead of `req.body.lineItems`
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
-            line_items: lineItems, // ✅ Corrected
+            line_items: lineItems,
             mode: "payment",
-            success_url: "http://localhost:5173/success",
-            cancel_url: "http://localhost:5173/cancel",
+            success_url: `${process.env.FRONTEND_URL}/success`,
+            cancel_url: `${process.env.FRONTEND_URL}/cancel`,
         });
 
         res.json({ id: session.id });
@@ -43,4 +43,6 @@ app.post("/api/create-checkout-session", async (req, res) => {
     }
 });
 
-app.listen(7000, () => console.log("Server running on port 7000"));
+// Export for Vercel
+module.exports = app;
+module.exports.handler = serverless(app);
