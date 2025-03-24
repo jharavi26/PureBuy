@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const serverless = require("serverless-http");
 
 const app = express();
 app.use(cors());
@@ -32,8 +31,8 @@ app.post("/api/create-checkout-session", async (req, res) => {
             payment_method_types: ["card"],
             line_items: lineItems,
             mode: "payment",
-            success_url: `${process.env.FRONTEND_URL}/success`,
-            cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+            success_url: "http://localhost:5173/success",
+            cancel_url: "http://localhost:5173/cancel",
         });
 
         res.json({ id: session.id });
@@ -43,6 +42,5 @@ app.post("/api/create-checkout-session", async (req, res) => {
     }
 });
 
-// Export for Vercel
-module.exports = app;
-module.exports.handler = serverless(app);
+const PORT = process.env.PORT || 7000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
